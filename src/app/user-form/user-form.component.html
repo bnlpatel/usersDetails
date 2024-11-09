@@ -1,0 +1,44 @@
+<h2 class="form-title">{{ userId ? 'Edit' : 'Add' }} User</h2>
+
+<form [formGroup]="addUserForm" (ngSubmit)="onSubmit()" class="user-form">
+
+  <mat-form-field class="form-field">
+    <mat-label>Name</mat-label>
+    <mat-icon matPrefix>person</mat-icon>
+    <input matInput formControlName="name" placeholder="Enter name">
+    <mat-error *ngIf="addUserForm.get('name')?.hasError('required')">
+      Name is required
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <mat-label>Email</mat-label>
+    <mat-icon matPrefix>email</mat-icon>
+    <input matInput formControlName="email" placeholder="Enter email">
+    <mat-error *ngIf="addUserForm.get('email')?.hasError('required')">
+      Email is required
+    </mat-error>
+    <mat-error *ngIf="addUserForm.get('email')?.hasError('email')">
+      Invalid email format
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="form-field">
+    <mat-label>Role</mat-label>
+    <mat-icon matPrefix>assignment_ind</mat-icon>
+    <input matInput formControlName="role" placeholder="Enter role">
+    <mat-error *ngIf="addUserForm.get('role')?.hasError('required')">
+      Role is required
+    </mat-error>
+  </mat-form-field>
+
+  <div class="form-buttons">
+    <button mat-raised-button color="primary" type="button" (click)="goBack()" class="submit-btn">
+      Back
+    </button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="addUserForm.invalid" class="submit-btn">
+      {{ userId ? 'Update' : 'Add' }} User
+    </button>
+  </div>
+
+</form>
